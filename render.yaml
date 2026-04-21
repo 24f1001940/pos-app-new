@@ -1,7 +1,7 @@
 services:
   - type: web
     name: mujahid-electronic-goods-api
-    env: node
+    runtime: node
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
@@ -35,7 +35,7 @@ services:
       - key: SMTP_PORT
         value: 587
       - key: SMTP_SECURE
-        value: false
+        value: "false"
       - key: SMTP_USER
         sync: false
       - key: SMTP_PASS
@@ -43,7 +43,7 @@ services:
       - key: SMTP_FROM
         sync: false
       - key: ENABLE_DAILY_SUMMARY_SCHEDULER
-        value: true
+        value: "true"
       - key: DAILY_SUMMARY_HOUR
         value: 20
       - key: CLOUDINARY_CLOUD_NAME
