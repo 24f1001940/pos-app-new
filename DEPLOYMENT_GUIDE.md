@@ -97,3 +97,22 @@ Override target URL:
 ```bash
 k6 run -e BASE_URL=https://your-api-domain.com scripts/load-test.k6.js
 ```
+
+## 11. GitHub Actions Auto Deployment
+
+Two workflows are included:
+
+- `.github/workflows/deploy-frontend-vercel.yml`
+- `.github/workflows/deploy-backend-render.yml`
+
+Required repository secrets:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+- `RENDER_DEPLOY_HOOK_URL`
+
+Behavior:
+
+- Frontend deploy runs on changes under `client/**` and manual dispatch.
+- Backend deploy runs on changes under `server/**`, `render.yaml`, and manual dispatch.

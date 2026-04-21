@@ -29,3 +29,9 @@ desktop-dist/
 *.blockmap
 *.exe
 *.dmg
+*.AppImage
+*.msi
+*.zip
+*.7z
+win-unpacked/
+latest*.yml
