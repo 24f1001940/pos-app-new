@@ -116,3 +116,7 @@ Behavior:
 
 - Frontend deploy runs on changes under `client/**` and manual dispatch.
 - Backend deploy runs on changes under `server/**`, `render.yaml`, and manual dispatch.
+
+## 12. One-Pass Live Go-Live
+
+For a copy-paste production rollout sequence, use `DEPLOY_NOW_CHECKLIST.md`.

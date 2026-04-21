@@ -16,6 +16,36 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: DEFAULT_CURRENCY
+        value: PKR
+      - key: DEFAULT_TAX_RATE
+        value: 18
+      - key: AUTH_LOCK_MAX_ATTEMPTS
+        value: 5
+      - key: AUTH_LOCK_MINUTES
+        value: 30
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 200
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: ENABLE_DAILY_SUMMARY_SCHEDULER
+        value: true
+      - key: DAILY_SUMMARY_HOUR
+        value: 20
       - key: CLOUDINARY_CLOUD_NAME
         sync: false
       - key: CLOUDINARY_API_KEY
