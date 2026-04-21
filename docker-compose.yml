@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - APP_NAME=Mujahid Electronic Goods API
+      - PORT=5000
+      - CLIENT_URL=http://localhost:5173
+      - MONGO_URI=mongodb://mongo:27017/mujahid-electronic-goods
+      - JWT_SECRET=change-this-secret
+      - JWT_REFRESH_SECRET=change-this-refresh-secret
+      - DEFAULT_CURRENCY=PKR
+      - DEFAULT_TAX_RATE=18
+      - RATE_LIMIT_WINDOW_MS=900000
+      - RATE_LIMIT_MAX_REQUESTS=200
+    depends_on:
+      - mongo
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '5173:80'
+    restart: unless-stopped
+    depends_on:
+      - server
+
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

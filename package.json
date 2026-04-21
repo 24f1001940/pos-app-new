@@ -1,0 +1,61 @@
+{
+  "name": "mujahid-electronic-goods",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Full-stack retail shop management and POS platform for Mujahid Electronic Goods.",
+  "scripts": {
+    "dev": "node scripts/dev-preflight.js && concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "desktop:dev": "concurrently \"npm run dev --prefix client\" \"npm run desktop:electron\"",
+    "desktop:electron": "wait-on http://localhost:5173 && cross-env ELECTRON_START_URL=http://localhost:5173 electron ./electron/main.cjs",
+    "desktop:build": "npm run build --prefix client && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder",
+    "desktop:build:win": "npm run build --prefix client && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win nsis -c.win.signAndEditExecutable=false",
+    "desktop:build:mac": "npm run build --prefix client && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac dmg",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "test": "npm run test --prefix server",
+    "seed": "npm run seed --prefix server"
+  },
+  "main": "electron/main.cjs",
+  "keywords": [
+    "electronics",
+    "pos",
+    "inventory",
+    "dashboard",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "OpenAI Codex",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^37.4.0",
+    "electron-builder": "^26.0.12",
+    "wait-on": "^9.0.2"
+  },
+  "build": {
+    "appId": "com.mujahid.electronic",
+    "productName": "Mujahid Electronic Goods",
+    "directories": {
+      "output": "desktop-dist"
+    },
+    "files": [
+      "electron/**/*",
+      "client/dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.business"
+    }
+  }
+}

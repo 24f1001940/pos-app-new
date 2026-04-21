@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 31 92% 52%;
+    --primary-foreground: 35 100% 98%;
+    --secondary: 188 78% 93%;
+    --secondary-foreground: 195 75% 24%;
+    --muted: 42 23% 94%;
+    --muted-foreground: 215 15% 42%;
+    --accent: 36 100% 94%;
+    --accent-foreground: 24 68% 27%;
+    --border: 38 20% 86%;
+    --ring: 31 92% 52%;
+    --success: 155 60% 40%;
+    --warning: 35 92% 52%;
+    --danger: 0 70% 56%;
+    --radius: 1.25rem;
+  }
+
+  .dark {
+    --background: 224 42% 7%;
+    --foreground: 210 40% 98%;
+    --card: 223 34% 11%;
+    --card-foreground: 210 40% 98%;
+    --primary: 29 95% 60%;
+    --primary-foreground: 224 42% 10%;
+    --secondary: 195 58% 16%;
+    --secondary-foreground: 187 100% 92%;
+    --muted: 223 28% 16%;
+    --muted-foreground: 214 18% 72%;
+    --accent: 224 24% 17%;
+    --accent-foreground: 38 90% 82%;
+    --border: 218 18% 22%;
+    --ring: 29 95% 60%;
+    --success: 155 63% 45%;
+    --warning: 35 92% 58%;
+    --danger: 0 78% 64%;
+  }
+
+  [data-accent='amber'] {
+    --primary: 31 92% 52%;
+    --ring: 31 92% 52%;
+  }
+
+  [data-accent='emerald'] {
+    --primary: 160 84% 39%;
+    --ring: 160 84% 39%;
+  }
+
+  [data-accent='sky'] {
+    --primary: 198 93% 47%;
+    --ring: 198 93% 47%;
+  }
+
+  [data-accent='rose'] {
+    --primary: 346 77% 57%;
+    --ring: 346 77% 57%;
+  }
+
+  [data-accent='violet'] {
+    --primary: 263 83% 64%;
+    --ring: 263 83% 64%;
+  }
+
+  [data-accent='slate'] {
+    --primary: 215 25% 27%;
+    --ring: 215 25% 27%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.15), transparent 22%),
+      radial-gradient(circle at 90% 0%, rgba(14, 165, 233, 0.14), transparent 20%),
+      radial-gradient(circle at 100% 80%, rgba(236, 72, 153, 0.08), transparent 18%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(247, 245, 240, 0.95));
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.14), transparent 22%),
+      radial-gradient(circle at 88% 8%, rgba(14, 165, 233, 0.1), transparent 20%),
+      radial-gradient(circle at 100% 80%, rgba(236, 72, 153, 0.08), transparent 18%),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(9, 15, 28, 1));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    background-color: hsl(var(--border));
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 dark:bg-slate-950/50 backdrop-blur-2xl border border-white/50 dark:border-white/10;
+  }
+
+  .section-ring {
+    @apply ring-1 ring-black/5 dark:ring-white/10;
+  }
+
+  .surface-elevated {
+    @apply shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)];
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

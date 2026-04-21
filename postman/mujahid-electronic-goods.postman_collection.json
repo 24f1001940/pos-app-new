@@ -1,0 +1,87 @@
+{
+  "info": {
+    "name": "Mujahid Electronic Goods API",
+    "_postman_id": "6d87d4de-0f93-4d85-9fbb-7d74bf31363b",
+    "description": "Core API collection for the Mujahid Electronic Goods POS platform.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Bootstrap Status",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/auth/bootstrap"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@mujahidgoods.com\",\n  \"password\": \"Admin@123\"\n}"
+        },
+        "url": "{{baseUrl}}/auth/login"
+      }
+    },
+    {
+      "name": "Get Products",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/products"
+      }
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Mi Android TV Stick\",\n  \"category\": \"Streaming\",\n  \"stock\": 10,\n  \"lowStockLimit\": 3,\n  \"cp\": 2200,\n  \"sp\": 2999,\n  \"image\": { \"url\": \"\", \"publicId\": \"\" }\n}"
+        },
+        "url": "{{baseUrl}}/products"
+      }
+    },
+    {
+      "name": "Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/dashboard"
+      }
+    },
+    {
+      "name": "Create Sale",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    { \"productId\": \"PUT_PRODUCT_ID_HERE\", \"quantity\": 1 }\n  ],\n  \"taxRate\": 18,\n  \"paymentMethod\": \"cash\"\n}"
+        },
+        "url": "{{baseUrl}}/sales"
+      }
+    },
+    {
+      "name": "Get Settings",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/settings"
+      }
+    }
+  ]
+}
