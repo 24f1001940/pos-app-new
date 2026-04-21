@@ -120,3 +120,5 @@ Behavior:
 ## 12. One-Pass Live Go-Live
 
 For a copy-paste production rollout sequence, use `DEPLOY_NOW_CHECKLIST.md`.
+
+For ready-to-paste secret/value blocks, use `DEPLOY_SECRETS_TEMPLATE.md`.

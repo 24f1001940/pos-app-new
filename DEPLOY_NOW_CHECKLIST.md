@@ -2,6 +2,8 @@
 
 Use this as the exact sequence for taking the app live on Render + Vercel.
 
+For copy-paste variable values, use `DEPLOY_SECRETS_TEMPLATE.md`.
+
 ## 1) MongoDB Atlas
 
 1. Create project and cluster.
