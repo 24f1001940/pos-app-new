@@ -24,15 +24,25 @@ const { applyRateLimit, sanitizeRequest } = require('./middlewares/security.midd
 const logger = require('./config/logger');
 
 const localDevOriginPattern = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
+const desktopOriginWhitelist = new Set([
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'null',
+]);
+
+function resolveCorsOrigins() {
+  if (env.nodeEnv === 'production') {
+    return [env.clientUrl, ...desktopOriginWhitelist];
+  }
+
+  return [env.clientUrl, localDevOriginPattern, ...desktopOriginWhitelist];
+}
 
 const app = express();
 
 app.use(
   cors({
-    origin:
-      env.nodeEnv === 'production'
-        ? [env.clientUrl]
-        : [env.clientUrl, localDevOriginPattern],
+    origin: resolveCorsOrigins(),
     credentials: true,
   }),
 );

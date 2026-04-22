@@ -10,6 +10,19 @@ const { setSocketServer } = require('./services/realtime.service');
 const { startSchedulers } = require('./services/scheduler.service');
 
 const localDevOriginPattern = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
+const desktopOriginWhitelist = new Set([
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'null',
+]);
+
+function resolveSocketCorsOrigins() {
+  if (env.nodeEnv === 'production') {
+    return [env.clientUrl, ...desktopOriginWhitelist];
+  }
+
+  return [env.clientUrl, localDevOriginPattern, ...desktopOriginWhitelist];
+}
 
 async function startServer() {
   if (env.nodeEnv === 'production' && env.jwtSecret === 'development-secret-key') {
@@ -22,10 +35,7 @@ async function startServer() {
   const server = http.createServer(app);
   const io = new Server(server, {
     cors: {
-      origin:
-        env.nodeEnv === 'production'
-          ? [env.clientUrl]
-          : [env.clientUrl, localDevOriginPattern],
+      origin: resolveSocketCorsOrigins(),
       credentials: true,
     },
   });
