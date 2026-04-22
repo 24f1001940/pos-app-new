@@ -2,8 +2,22 @@ import axios from 'axios'
 
 import { getCachedData, getStoredToken, setCachedData } from './storage'
 
+const localApiBaseUrl = 'http://localhost:5000/api'
+const desktopApiBaseUrl = 'https://pos-app-new.onrender.com/api'
+
+function resolveApiBaseUrl() {
+  const configuredBaseUrl = import.meta.env.VITE_API_URL || localApiBaseUrl
+  const isDesktopRuntime = typeof window !== 'undefined' && Boolean(window.megDesktop)
+
+  if (isDesktopRuntime && configuredBaseUrl.includes('localhost')) {
+    return import.meta.env.VITE_DESKTOP_API_URL || desktopApiBaseUrl
+  }
+
+  return configuredBaseUrl
+}
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: resolveApiBaseUrl(),
 })
 
 api.interceptors.request.use((config) => {
